@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour
 
         if(transform.position.x == target.x && transform.position.y == target.y)
         {
-            
+            DestroyProjectile();
         }
     }
 
@@ -31,7 +31,7 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-
+            DestroyProjectile();
         }
     }
 

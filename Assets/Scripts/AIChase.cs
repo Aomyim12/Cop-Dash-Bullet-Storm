@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class AIChase : MonoBehaviour
 {
-    public GameObject player;
+    private Transform player;
     public float speed;
 
     private float distance;
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     // Update is called once per frame
