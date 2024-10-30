@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 8004085327327293266}
   - component: {fileID: 8143897834295328269}
   - component: {fileID: -5995905394100083791}
+  - component: {fileID: 8623107248885002620}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -256,3 +257,17 @@ MonoBehaviour:
   firePoint: {fileID: 8459026797475473276}
   shootRate: 0.5
   projectileSpeed: 10
+  targetRange: 10
+--- !u!114 &8623107248885002620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3755178612662526790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b5872ada223f4147b480fe50e8b8a28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5

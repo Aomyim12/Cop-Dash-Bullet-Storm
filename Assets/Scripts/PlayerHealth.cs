@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 5; // HP สูงสุด
+    public int maxHealth = 10; // จำนวน HP สูงสุด
     private int currentHealth;
 
     void Start()
@@ -12,18 +12,20 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth; // ตั้งค่า HP เริ่มต้น
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int amount)
     {
-        currentHealth -= damage; // ลด HP ตามความเสียหายที่ได้รับ
-
+        currentHealth -= amount; // ลดจำนวน HP
         if (currentHealth <= 0)
         {
-            Die(); // ถ้า HP หมด เรียกฟังก์ชัน Die
+            Die(); // เรียกฟังก์ชันที่จัดการเมื่อ Player ตาย
         }
     }
 
-    void Die()
+    private void Die()
     {
-        Destroy(gameObject); // ทำลายเมื่อ HP หมด
+        // จัดการการตาย เช่น เล่นอนิเมชัน หรือลบ Player ออกจากฉาก
+        Debug.Log("Player has died.");
+        // ทำลาย Player หรือทำการรีเซ็ตฉากที่นี่
+        Destroy(gameObject); // ตัวอย่าง: ทำลาย Player
     }
 }
