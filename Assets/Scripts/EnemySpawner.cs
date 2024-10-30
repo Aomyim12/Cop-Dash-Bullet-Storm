@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class EnemySpawner : MonoBehaviour
@@ -11,6 +10,7 @@ public class EnemySpawner : MonoBehaviour
     public float spawnRateIncrease = 0.5f; // อัตราการเพิ่มความถี่การเกิดศัตรู
     public float totalTime = 5f;         // เวลานับถอยหลังทั้งหมด (วินาที)
     public TextMeshProUGUI countdownText; // UI Text สำหรับแสดงเวลาถอยหลัง
+    public GameObject winPanel;            // Panel สำหรับแสดงข้อความ "You Win!!"
 
     private float currentTime;            // เวลาปัจจุบัน
     private bool isSpawning = true;       // เช็คว่ายังสร้างศัตรูอยู่หรือไม่
@@ -22,6 +22,7 @@ public class EnemySpawner : MonoBehaviour
         currentTime = totalTime;         // ตั้งค่าเวลาเริ่มต้น
         StartCoroutine(SpawnEnemies());  // เริ่มการสร้างศัตรู
         StartCoroutine(CountdownTimer()); // เริ่มการนับถอยหลัง
+        winPanel.SetActive(false); // ซ่อน Win Panel ในตอนเริ่มเกม
     }
 
     IEnumerator SpawnEnemies()
@@ -65,5 +66,6 @@ public class EnemySpawner : MonoBehaviour
 
         isSpawning = false; // หยุดการสร้างศัตรูเมื่อหมดเวลา
         countdownText.text = "Time's Up!"; // แสดงข้อความเมื่อหมดเวลา
+        winPanel.SetActive(true); // แสดง Win Panel
     }
 }
