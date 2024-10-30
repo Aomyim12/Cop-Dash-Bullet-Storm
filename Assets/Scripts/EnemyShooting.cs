@@ -17,7 +17,14 @@ public class EnemyShooting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player")?.transform; // ใช้ ? เพื่อหลีกเลี่ยง NullReferenceException
+
+        if (player == null)
+        {
+            Debug.LogError("Player not found! Make sure the Player GameObject has the tag 'Player'.");
+            Destroy(gameObject); // ทำลาย Enemy ถ้าไม่พบ Player
+            return; // ออกจากฟังก์ชัน Start
+        }
 
         timeBtwShots = startTimeBtwShots;
     }
@@ -25,27 +32,36 @@ public class EnemyShooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector2.Distance(transform.position, player.position) > stoppingDistance) 
+        // ตรวจสอบว่าผู้เล่นยังมีอยู่หรือไม่
+        if (player == null)
+        {
+            Destroy(gameObject); // ทำลาย Enemy
+            return; // ออกจากฟังก์ชัน Update
+        }
+
+        // การเคลื่อนไหวของ Enemy
+        if (Vector2.Distance(transform.position, player.position) > stoppingDistance)
         {
             transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
         }
         else if (Vector2.Distance(transform.position, player.position) < stoppingDistance && Vector2.Distance(transform.position, player.position) > retreatDistance)
         {
-            transform.position = this.transform.position;
+            transform.position = this.transform.position; // ยืนอยู่ที่เดิม
         }
-        else if(Vector2.Distance(transform.position, player.position) < retreatDistance)
+        else if (Vector2.Distance(transform.position, player.position) < retreatDistance)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, player.position, -speed * Time.deltaTime); // ถอยกลับ
         }
 
+        // การยิง
         if (timeBtwShots <= 0)
         {
             Instantiate(projectile, transform.position, Quaternion.identity);
-            timeBtwShots = startTimeBtwShots;
+            timeBtwShots = startTimeBtwShots; // รีเซ็ตเวลา
         }
         else
         {
-            timeBtwShots -= Time.deltaTime;
+            timeBtwShots -= Time.deltaTime; // ลดเวลา
         }
     }
 }
