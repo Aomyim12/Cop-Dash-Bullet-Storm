@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed = 5f; // ความเร็วเริ่มต้นในการเคลื่อนที่
     private Vector2 movementInput;
     private Rigidbody2D rb;
     private PlayerControls controls;
@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        // Enable the input actions
         controls.Player.Move.performed += OnMovementInput;
         controls.Player.Move.canceled += OnMovementInput;
         controls.Enable();
@@ -24,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDisable()
     {
-        // Disable the input actions
         controls.Player.Move.performed -= OnMovementInput;
         controls.Player.Move.canceled -= OnMovementInput;
         controls.Disable();
@@ -32,13 +30,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnMovementInput(InputAction.CallbackContext context)
     {
-        // Update the movement input value
         movementInput = context.ReadValue<Vector2>();
     }
 
     private void FixedUpdate()
     {
-        // Move the player using the Rigidbody
+        // ใช้ค่า moveSpeed ที่อัปเกรดแล้ว
         rb.MovePosition(rb.position + movementInput * moveSpeed * Time.fixedDeltaTime);
+    }
+
+    // ฟังก์ชันที่ใช้ในการอัปเกรด Speed Boost
+    public void UpgradeSpeedBoost(float newMoveSpeed)
+    {
+        moveSpeed = newMoveSpeed;
     }
 }

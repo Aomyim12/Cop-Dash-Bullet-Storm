@@ -10,11 +10,11 @@ public class PlayerLevel : MonoBehaviour
     public void CollectItem()
     {
         itemCount++;
-        if (itemCount >= 10)
+        if (itemCount >= 1)
         {
             itemCount = 0; // รีเซ็ตจำนวนไอเท็ม
             IncreaseLevel(); // เพิ่มเลเวล
-            SkillSelectionManager.Instance.ShowSkillSelection(); // แสดงหน้าจอเลือกสกิล
+            SkillSelectionManager.Instance.ShowSkillSelectionMenu(); // แสดงหน้าจอเลือกสกิล
         }
     }
 

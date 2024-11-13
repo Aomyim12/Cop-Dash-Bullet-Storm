@@ -9,6 +9,8 @@ public class PlayerAutoShooting : MonoBehaviour
     public float targetRange = 10f;     // ระยะการล็อกเป้า
 
     private float shootTimer;
+    public int powerBlastLevel = 1; // ระดับ Power Blast
+    public int fastShootingLevel = 1; // ระดับ Fast Shooting
 
     void Update()
     {
@@ -62,5 +64,27 @@ public class PlayerAutoShooting : MonoBehaviour
         }
 
         return closestEnemy;
+    }
+
+    public void UpgradeFastShooting()
+    {
+        if (fastShootingLevel < 3)
+        {
+            fastShootingLevel++;
+
+            // ปรับ shootRate ตามระดับ
+            switch (fastShootingLevel)
+            {
+                case 2:
+                    shootRate = 0.4f;
+                    break;
+                case 3:
+                    shootRate = 0.3f;
+                    break;
+                default:
+                    shootRate = 0.5f;
+                    break;
+            }
+        }
     }
 }
