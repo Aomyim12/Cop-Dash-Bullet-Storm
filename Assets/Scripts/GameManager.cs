@@ -104,6 +104,6 @@ public class GameManager : MonoBehaviour
     private void RestartGame()
     {
         // โหลดฉากปัจจุบันใหม่
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("Menu");
     }
 }
