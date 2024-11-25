@@ -302,10 +302,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d80983da384ae48409c7e9e73b5ca4a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionCooldown: 5
+  powerBlastLevel: 1
+  powerBlastScript: {fileID: 0}
   shootRate: 0.5
   moveSpeed: 5
-  explosionLevel: 1
   shootSpeedLevel: 1
   moveSpeedLevel: 1
   playerAutoShooting: {fileID: 0}
@@ -325,3 +325,5 @@ MonoBehaviour:
   powerBlastRadius: 5
   damage: 10
   powerBlastCooldown: 5
+  powerBlastLevel: 1
+  explosionEffectPrefab: {fileID: 688671181422655200, guid: 9ba56292c702ce448921b5ef1ea8c361, type: 3}

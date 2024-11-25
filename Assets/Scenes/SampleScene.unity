@@ -679,7 +679,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
+  m_LookAt: {fileID: 1265664933}
   m_Follow: {fileID: 1265664933}
   m_Lens:
     FieldOfView: 60
@@ -1062,7 +1062,9 @@ MonoBehaviour:
   gameOverUI: {fileID: 812603102}
   restartButton: {fileID: 1748672063}
   bossPrefab: {fileID: 4493883941772448209, guid: cfda5896066da2b4889342dbc73ad40c, type: 3}
-  spawnTime: 20
+  magicWitchPrefab: {fileID: 5461920248787797429, guid: 3f8428980cd455042b1f362d7444783a, type: 3}
+  spawnTimeBoss: 20
+  spawnTimeWitch: 30
 --- !u!4 &419211842
 Transform:
   m_ObjectHideFlags: 0
@@ -1320,7 +1322,7 @@ MonoBehaviour:
   m_ShowDebugText: 0
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
-  m_WorldUpOverride: {fileID: 0}
+  m_WorldUpOverride: {fileID: 1265664933}
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
@@ -1920,11 +1922,11 @@ PrefabInstance:
     - target: {fileID: 8380069922748420341, guid: 92869759bfdced14e9896687958e85e0, type: 3}
       propertyPath: powerBlastScript
       value: 
-      objectReference: {fileID: 1265664942}
+      objectReference: {fileID: 0}
     - target: {fileID: 8380069922748420341, guid: 92869759bfdced14e9896687958e85e0, type: 3}
       propertyPath: playerAutoShooting
       value: 
-      objectReference: {fileID: 1265664927}
+      objectReference: {fileID: 0}
     - target: {fileID: 8623107248885002620, guid: 92869759bfdced14e9896687958e85e0, type: 3}
       propertyPath: maxHealth
       value: 100
@@ -2068,17 +2070,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263196576}
   m_CullTransparentMesh: 1
---- !u!114 &1265664927 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -5995905394100083791, guid: 92869759bfdced14e9896687958e85e0, type: 3}
-  m_PrefabInstance: {fileID: 1182538450}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bb939b6ff8beb0428bd193b7ab490a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1265664929 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8004085327327293266, guid: 92869759bfdced14e9896687958e85e0, type: 3}
@@ -2095,28 +2086,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5753590785726750932, guid: 92869759bfdced14e9896687958e85e0, type: 3}
   m_PrefabInstance: {fileID: 1182538450}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1265664935 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8380069922748420341, guid: 92869759bfdced14e9896687958e85e0, type: 3}
-  m_PrefabInstance: {fileID: 1182538450}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d80983da384ae48409c7e9e73b5ca4a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1265664942 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -3479673905476243428, guid: 92869759bfdced14e9896687958e85e0, type: 3}
-  m_PrefabInstance: {fileID: 1182538450}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9721134fd85712438b7880768785258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1284827943
 GameObject:
   m_ObjectHideFlags: 0
@@ -2146,7 +2115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fcb90a903499a0459940c707d8b2247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSkills: {fileID: 1265664935}
+  playerSkills: {fileID: 0}
   skillSelectionUI: {fileID: 1497315691}
   skillButtons:
   - {fileID: 2037667027}
