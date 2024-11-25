@@ -1061,6 +1061,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverUI: {fileID: 812603102}
   restartButton: {fileID: 1748672063}
+  bossPrefab: {fileID: 4493883941772448209, guid: cfda5896066da2b4889342dbc73ad40c, type: 3}
+  spawnTime: 20
 --- !u!4 &419211842
 Transform:
   m_ObjectHideFlags: 0
