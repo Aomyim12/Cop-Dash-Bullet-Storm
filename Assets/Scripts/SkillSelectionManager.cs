@@ -28,8 +28,14 @@ public class SkillSelectionManager : MonoBehaviour
 
     private void Start()
     {
+        if (playerSkills == null)
+        {
+            playerSkills = FindObjectOfType<PlayerSkills>();
+        }
+
         skillSelectionUI.SetActive(false); // ซ่อน UI เมื่อเริ่มเกม
     }
+
 
     // ฟังก์ชันนี้จะแสดง UI เลือกสกิลเมื่อผู้เล่นเก็บไอเท็มครบ 10 ชิ้น
     public void ShowSkillSelectionMenu()
@@ -46,19 +52,20 @@ public class SkillSelectionManager : MonoBehaviour
         Time.timeScale = 1f; // เริ่มเกมใหม่
     }
 
-    // ฟังก์ชันนี้จะใช้เพื่ออัปเดตปุ่มสกิลที่สามารถเลือกได้
     public void UpdateSkillButtons()
     {
         for (int i = 0; i < skillButtons.Length; i++)
         {
-            if (i < playerSkills.explosionLevel) // ตรวจสอบว่าผู้เล่นปลดล็อคสกิลแล้วหรือยัง
+            bool isUnlocked = i switch
             {
-                skillButtons[i].SetActive(true); // แสดงปุ่ม
-            }
-            else
-            {
-                skillButtons[i].SetActive(false); // ซ่อนปุ่ม
-            }
+                0 => playerSkills.powerBlastLevel > i,
+                1 => playerSkills.shootSpeedLevel > i,
+                2 => playerSkills.moveSpeedLevel > i,
+                _ => false
+            };
+
+            skillButtons[i].SetActive(isUnlocked); // เปิด/ปิดปุ่มตามเงื่อนไข
         }
     }
+
 }

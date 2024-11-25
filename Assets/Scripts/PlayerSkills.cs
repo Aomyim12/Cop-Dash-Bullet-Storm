@@ -5,25 +5,47 @@ using UnityEngine;
 public class PlayerSkills : MonoBehaviour
 {
     // ค่าพื้นฐานของสกิล
-    public float explosionCooldown = 5f; // ระยะเวลา cooldown ของสกิลระเบิด
+    public int powerBlastLevel = 1;     // ระดับ Power Blast
+    public PowerBlastAOE powerBlastScript; // อ้างอิงถึง PowerBlastAOE script
+
     public float shootRate = 0.5f;       // ความเร็วในการยิง
     public float moveSpeed = 5f;         // ความเร็วในการเคลื่อนที่
 
     // ตัวแปรที่ใช้เก็บระดับของแต่ละสกิล
-    public int explosionLevel = 1;
+    
     public int shootSpeedLevel = 1;
     public int moveSpeedLevel = 1;
 
     public PlayerAutoShooting playerAutoShooting;
     public PlayerMovement playerMovement;
 
+    private void Start()
+    {
+        if (powerBlastScript == null)
+        {
+            powerBlastScript = GetComponent<PowerBlastAOE>();
+        }
+
+        if (playerAutoShooting == null)
+        {
+            playerAutoShooting = GetComponent<PlayerAutoShooting>();
+        }
+
+        if (playerMovement == null)
+        {
+            playerMovement = GetComponent<PlayerMovement>();
+        }
+    }
+
+
+
     public void UpgradeSkill(int skillIndex)
     {
         switch (skillIndex)
         {
-            case 0: // ระเบิดพลัง (Power Blast)
-                explosionLevel++;
-                explosionCooldown = Mathf.Max(1f, explosionCooldown - 1f); // ลดเวลา cooldown ของระเบิด
+            case 0: // Power Blast (ระเบิดพลัง)
+                powerBlastLevel++;
+                powerBlastScript.UpgradePowerBlast(powerBlastLevel); // เรียกฟังก์ชัน UpgradePowerBlast จาก PowerBlastAOE.cs
                 break;
             case 1: // ยิงเร็วขึ้น (Fast Shooting)
                 shootSpeedLevel++;
@@ -38,7 +60,7 @@ public class PlayerSkills : MonoBehaviour
         }
 
         // ตรวจสอบสถานะของสกิล
-        Debug.Log("Explosion Level: " + explosionLevel);
+        Debug.Log("Power Blast Level: " + powerBlastLevel);
         Debug.Log("Shoot Speed Level: " + shootSpeedLevel);
         Debug.Log("Move Speed Level: " + moveSpeedLevel);
     }

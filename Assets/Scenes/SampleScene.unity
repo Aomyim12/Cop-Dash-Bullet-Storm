@@ -1835,6 +1835,34 @@ PrefabInstance:
       propertyPath: shootRate
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: -3479673905476243428, guid: 92869759bfdced14e9896687958e85e0, type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -3479673905476243428, guid: 92869759bfdced14e9896687958e85e0, type: 3}
+      propertyPath: powerBlastRadius
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -3479673905476243428, guid: 92869759bfdced14e9896687958e85e0, type: 3}
+      propertyPath: explosionEffectPrefab
+      value: 
+      objectReference: {fileID: 688671181422655200, guid: 9ba56292c702ce448921b5ef1ea8c361, type: 3}
+    - target: {fileID: 3057311259509647548, guid: 92869759bfdced14e9896687958e85e0, type: 3}
+      propertyPath: m_Color.b
+      value: 0.04801533
+      objectReference: {fileID: 0}
+    - target: {fileID: 3057311259509647548, guid: 92869759bfdced14e9896687958e85e0, type: 3}
+      propertyPath: m_Color.g
+      value: 0.04801533
+      objectReference: {fileID: 0}
+    - target: {fileID: 3057311259509647548, guid: 92869759bfdced14e9896687958e85e0, type: 3}
+      propertyPath: m_Color.r
+      value: 0.7830189
+      objectReference: {fileID: 0}
+    - target: {fileID: 3057311259509647548, guid: 92869759bfdced14e9896687958e85e0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3755178612662526790, guid: 92869759bfdced14e9896687958e85e0, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1887,6 +1915,10 @@ PrefabInstance:
       propertyPath: playerMovement
       value: 
       objectReference: {fileID: 1265664929}
+    - target: {fileID: 8380069922748420341, guid: 92869759bfdced14e9896687958e85e0, type: 3}
+      propertyPath: powerBlastScript
+      value: 
+      objectReference: {fileID: 1265664942}
     - target: {fileID: 8380069922748420341, guid: 92869759bfdced14e9896687958e85e0, type: 3}
       propertyPath: playerAutoShooting
       value: 
@@ -2070,6 +2102,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d80983da384ae48409c7e9e73b5ca4a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1265664942 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -3479673905476243428, guid: 92869759bfdced14e9896687958e85e0, type: 3}
+  m_PrefabInstance: {fileID: 1182538450}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9721134fd85712438b7880768785258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1284827943
@@ -3183,10 +3226,10 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
+  - {fileID: 1182538450}
   - {fileID: 1090307928}
   - {fileID: 289420991}
   - {fileID: 142232929}
-  - {fileID: 1182538450}
   - {fileID: 1317464741}
   - {fileID: 1518230325}
   - {fileID: 102172729}
