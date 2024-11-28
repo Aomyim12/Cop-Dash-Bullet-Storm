@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerSkills : MonoBehaviour
 {
+    
+
     // ค่าพื้นฐานของสกิล
     public int powerBlastLevel = 1;     // ระดับ Power Blast
     public PowerBlastAOE powerBlastScript; // อ้างอิงถึง PowerBlastAOE script
@@ -18,6 +20,10 @@ public class PlayerSkills : MonoBehaviour
 
     public PlayerAutoShooting playerAutoShooting;
     public PlayerMovement playerMovement;
+
+
+    
+
 
     private void Start()
     {
