@@ -11,6 +11,7 @@ public class EnemySpawner : MonoBehaviour
     public float totalTime = 5f;         // เวลานับถอยหลังทั้งหมด (วินาที)
     public TextMeshProUGUI countdownText; // UI Text สำหรับแสดงเวลาถอยหลัง
     public GameObject winPanel;            // Panel สำหรับแสดงข้อความ "You Win!!"
+    
 
     private float currentTime;            // เวลาปัจจุบัน
     private bool isSpawning = true;       // เช็คว่ายังสร้างศัตรูอยู่หรือไม่
@@ -29,25 +30,27 @@ public class EnemySpawner : MonoBehaviour
     {
         while (isSpawning)
         {
-            // ตรวจสอบว่า Player ยังมีชีวิตอยู่หรือไม่
             if (playerHealth == null || playerHealth.currentHealth <= 0)
             {
-                isSpawning = false; // หยุดการสร้างศัตรู
-                yield break; // ออกจาก Coroutine
+                isSpawning = false;
+                yield break;
             }
 
-            yield return new WaitForSeconds(spawnRate); // รอจนกว่าจะถึงเวลาสร้างศัตรูใหม่
+            yield return new WaitForSeconds(spawnRate);
 
-            // สุ่มเลือก prefab ศัตรูจาก List
             int randomIndex = Random.Range(0, enemyPrefabs.Count);
             GameObject enemyPrefab = enemyPrefabs[randomIndex];
 
-            // สร้างศัตรูที่ตำแหน่งสุ่ม
-            Vector2 spawnPosition = new Vector2(Random.Range(-10, 10), Random.Range(-5, 5));
+            // ใช้ Camera เพื่อให้ตำแหน่งการเกิดอยู่ในขอบเขตหน้าจอ
+            Vector2 spawnPosition = Camera.main.ViewportToWorldPoint(
+                new Vector2(Random.Range(0f, 1f), Random.Range(0f, 1f))
+            );
+            spawnPosition.x = Mathf.Clamp(spawnPosition.x, -10f, 10f); // ให้ตำแหน่งอยู่ในขอบเขต
+            spawnPosition.y = Mathf.Clamp(spawnPosition.y, -5f, 5f);
+
             Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
 
-            // ลด spawnRate เมื่อเข้าใกล้หมดเวลาเพื่อสร้างศัตรูถี่ขึ้น
-            if (currentTime <= 15f && spawnRate > 0.5f) // ลด spawnRate เมื่อใกล้หมดเวลา
+            if (currentTime <= 15f && spawnRate > 0.5f)
             {
                 spawnRate -= spawnRateIncrease * Time.deltaTime;
             }
