@@ -4,68 +4,110 @@ using UnityEngine;
 
 public class SkillSelectionManager : MonoBehaviour
 {
-    public static SkillSelectionManager Instance; // สร้างตัวแปร static สำหรับ Singleton
+    public static SkillSelectionManager Instance; // Singleton instance
 
-    public PlayerSkills playerSkills; // อ้างอิงถึง PlayerSkills
-    public GameObject skillSelectionUI; // UI สำหรับการเลือกสกิล
-    public GameObject[] skillButtons;  // ปุ่มที่ใช้เลือกสกิล
+    public PlayerSkills playerSkills; // Reference to PlayerSkills
+    public GameObject skillSelectionUI; // UI for skill selection
+    public GameObject[] skillButtons;  // Skill buttons
 
     private void Awake()
     {
-        // ตรวจสอบว่ามี Instance อยู่หรือไม่
+        // Ensure only one instance of SkillSelectionManager exists
         if (Instance == null)
         {
-            Instance = this; // หากไม่มี ให้ตั้งค่าเป็นตัวแปรนี้
+            Instance = this;
         }
         else if (Instance != this)
         {
-            Destroy(gameObject); // ถ้ามี Instance อยู่แล้ว ให้ทำลายเกมอ็อบเจ็กต์นี้
+            Destroy(gameObject); // Destroy duplicate instance
         }
 
-        // ทำให้ SkillSelectionManager ไม่ถูกทำลายเมื่อ Scene เปลี่ยน
+        // Prevent this object from being destroyed on scene load
         DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
+        InitializePlayerSkills();
+        skillSelectionUI.SetActive(false); // Hide UI at game start
+    }
+
+    private void OnEnable()
+    {
+        // Subscribe to the scene-loaded event to reinitialize playerSkills
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        // Unsubscribe from the event when this object is disabled
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // Reinitialize PlayerSkills when a new scene is loaded
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    {
+        InitializePlayerSkills();
+    }
+
+    // Find and assign PlayerSkills reference
+    private void InitializePlayerSkills()
+    {
+        playerSkills = FindObjectOfType<PlayerSkills>();
         if (playerSkills == null)
         {
-            playerSkills = FindObjectOfType<PlayerSkills>();
+            Debug.LogError("PlayerSkills not found in the scene!");
         }
-
-        skillSelectionUI.SetActive(false); // ซ่อน UI เมื่อเริ่มเกม
+        else
+        {
+            UpdateSkillButtons(); // Update skill buttons after reassigning PlayerSkills
+        }
     }
 
-
-    // ฟังก์ชันนี้จะแสดง UI เลือกสกิลเมื่อผู้เล่นเก็บไอเท็มครบ 10 ชิ้น
+    // Show the skill selection menu
     public void ShowSkillSelectionMenu()
     {
-        skillSelectionUI.SetActive(true); // แสดง UI
-        Time.timeScale = 0f; // หยุดเกม
+        skillSelectionUI.SetActive(true); // Show UI
+        Time.timeScale = 0f; // Pause the game
     }
 
-    // ฟังก์ชันนี้จะถูกเรียกเมื่อผู้เล่นเลือกสกิล
+    // Handle skill selection
     public void SelectSkill(int skillIndex)
     {
-        playerSkills.UpgradeSkill(skillIndex); // อัปเกรดสกิลตามที่เลือก
-        skillSelectionUI.SetActive(false); // ซ่อน UI
-        Time.timeScale = 1f; // เริ่มเกมใหม่
+        if (playerSkills != null)
+        {
+            playerSkills.UpgradeSkill(skillIndex); // Upgrade the selected skill
+            UpdateSkillButtons(); // Refresh buttons after upgrading
+        }
+        else
+        {
+            Debug.LogError("PlayerSkills reference is missing!");
+        }
+
+        skillSelectionUI.SetActive(false); // Hide UI
+        Time.timeScale = 1f; // Resume the game
     }
 
+    // Update skill buttons based on player skill levels
     public void UpdateSkillButtons()
     {
+        if (playerSkills == null)
+        {
+            Debug.LogError("PlayerSkills reference is missing!");
+            return;
+        }
+
         for (int i = 0; i < skillButtons.Length; i++)
         {
             bool isUnlocked = i switch
             {
-                0 => playerSkills.powerBlastLevel > i,
-                1 => playerSkills.shootSpeedLevel > i,
-                2 => playerSkills.moveSpeedLevel > i,
+                0 => playerSkills.powerBlastLevel > 0,
+                1 => playerSkills.shootSpeedLevel > 0,
+                2 => playerSkills.moveSpeedLevel > 0,
                 _ => false
             };
 
-            skillButtons[i].SetActive(isUnlocked); // เปิด/ปิดปุ่มตามเงื่อนไข
+            skillButtons[i].SetActive(isUnlocked); // Enable/disable buttons based on conditions
         }
     }
-
 }

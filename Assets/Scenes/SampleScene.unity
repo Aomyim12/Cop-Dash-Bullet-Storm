@@ -3568,7 +3568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fcb90a903499a0459940c707d8b2247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSkills: {fileID: 0}
+  playerSkills: {fileID: 1383847991}
   skillSelectionUI: {fileID: 1497315691}
   skillButtons:
   - {fileID: 2037667027}
@@ -3664,6 +3664,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3436a07c0e9c655439561233053aec24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1383847991 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8380069922748420341, guid: 92869759bfdced14e9896687958e85e0, type: 3}
+  m_PrefabInstance: {fileID: 1182538450}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d80983da384ae48409c7e9e73b5ca4a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1396725310
