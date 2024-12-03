@@ -34,14 +34,19 @@ public class SkillSelectionManager : MonoBehaviour
 
     private void OnEnable()
     {
-        // Subscribe to the scene-loaded event to reinitialize playerSkills
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+        PlayerSkills.OnPlayerSpawned += AssignPlayerSkills;
     }
 
     private void OnDisable()
     {
-        // Unsubscribe from the event when this object is disabled
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+        PlayerSkills.OnPlayerSpawned -= AssignPlayerSkills;
+    }
+
+    private void AssignPlayerSkills(PlayerSkills newPlayerSkills)
+    {
+        playerSkills = newPlayerSkills;
+        UpdateSkillButtons();
+        Debug.Log("PlayerSkills successfully assigned.");
     }
 
     // Reinitialize PlayerSkills when a new scene is loaded
@@ -76,7 +81,22 @@ public class SkillSelectionManager : MonoBehaviour
     {
         if (playerSkills != null)
         {
-            playerSkills.UpgradeSkill(skillIndex); // Upgrade the selected skill
+            switch (skillIndex)
+            {
+                case 0: // Power Blast
+                    playerSkills.UpgradePowerBlast();
+                    break;
+                case 1: // Fast Shooting
+                    playerSkills.UpgradeFastShooting();
+                    break;
+                case 2: // Speed Boost
+                    playerSkills.UpgradeSpeedBoost();
+                    break;
+                default:
+                    Debug.LogWarning("Invalid skill index selected!");
+                    break;
+            }
+
             UpdateSkillButtons(); // Refresh buttons after upgrading
         }
         else

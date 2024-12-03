@@ -17,11 +17,11 @@ public class EnemyShooting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player")?.transform; // ใช้ ? เพื่อหลีกเลี่ยง NullReferenceException
+        player = GameObject.FindGameObjectWithTag("Player")?.transform; 
 
         if (player == null)
         {
-            Debug.LogError("Player not found! Make sure the Player GameObject has the tag 'Player'.");
+            
             Destroy(gameObject); // ทำลาย Enemy ถ้าไม่พบ Player
             return; // ออกจากฟังก์ชัน Start
         }
