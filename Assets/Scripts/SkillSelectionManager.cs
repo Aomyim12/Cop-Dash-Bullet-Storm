@@ -104,11 +104,11 @@ public class SkillSelectionManager : MonoBehaviour
             Debug.LogError("PlayerSkills reference is missing!");
         }
 
-        skillSelectionUI.SetActive(false); // Hide UI
-        Time.timeScale = 1f; // Resume the game
+        skillSelectionUI.SetActive(false); 
+        Time.timeScale = 1f; 
     }
 
-    // Update skill buttons based on player skill levels
+    
     public void UpdateSkillButtons()
     {
         if (playerSkills == null)
@@ -127,7 +127,7 @@ public class SkillSelectionManager : MonoBehaviour
                 _ => false
             };
 
-            skillButtons[i].SetActive(isUnlocked); // Enable/disable buttons based on conditions
+            skillButtons[i].SetActive(isUnlocked); 
         }
     }
 }
